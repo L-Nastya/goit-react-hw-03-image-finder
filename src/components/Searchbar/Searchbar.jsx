@@ -1,7 +1,9 @@
 import { React, Component } from "react";
 import styled from "styled-components";
 import { GoSearch } from 'react-icons/go';
-import { toast} from 'react-toastify';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
+
 class Searchbar extends Component{
     state = {
         text: ""
@@ -100,3 +102,6 @@ const SearchInput = styled.input`
 
 }
 `;
+Searchbar.propTypes = {
+    onSubmit: PropTypes.func.isRequired,
+}

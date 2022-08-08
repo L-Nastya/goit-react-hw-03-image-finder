@@ -5,7 +5,8 @@ import Modal from '../modal/modal';
 import LoadMore from '../Button/Button'
 import { fetchPicture } from "services/api";
 import Loader from "components/Loader/loader";
-import { toast} from 'react-toastify';
+import { toast } from 'react-toastify';
+import PropTypes from 'prop-types';
 
 const Status = {
   IDLE: 'idle',
@@ -70,11 +71,6 @@ class ImageGallery extends Component {
             showModal: !showModal,
         }));
     };
-    showLoadMore = () => {
-        this.setState(({  showBtn }) => ({
-            showBtn: !showBtn,
-        }));
-    };
     showLargePicture = (pictureId) => {
              this.setState(() => ({
             largeImageURL: pictureId,
@@ -125,3 +121,7 @@ const Message = styled.div`
     font-style: italic;
     font-weight: bold;
 `;
+
+ImageGallery.propTypes = {
+    request: PropTypes.string.isRequired,
+}

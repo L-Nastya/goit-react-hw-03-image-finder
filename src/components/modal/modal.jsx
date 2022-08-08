@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import { createPortal } from 'react-dom';
 import styled from 'styled-components';
+import PropTypes from 'prop-types';
 
 const modalRoot = document.querySelector('#modal-root');
 
@@ -53,3 +54,7 @@ const ModalText = styled.div`
   max-height: calc(100vh - 24px);
   color: white;
 `;
+
+Modal.propTypes = {
+    children: PropTypes.node,
+}
