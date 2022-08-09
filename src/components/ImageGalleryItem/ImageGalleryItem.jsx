@@ -2,17 +2,14 @@ import React from "react";
 import styled from "styled-components";
 import PropTypes from 'prop-types';
 
-const ImageGalleryItem = ({pictures, onLargePic, onToggle }) => {
-    return(
-        pictures.map(item =>
-            <ListItem key = {item.id}>
-                <ListImg
-                    onClick={() => onToggle(onLargePic(item.largeImageURL))}
-                    src={item.webformatURL}
-                    alt={item.tags}
-                />
-           </ListItem>
-  )     
+const ImageGalleryItem = ({id, largeImageURL, webformatURL, tags, onLargePic}) => {
+    return(  
+               <ListItem key = {id}>
+                 <ListImg
+                   onClick={() => onLargePic(largeImageURL)}
+                   src={webformatURL}
+                   alt={tags}
+                /></ListItem>    
   )    
     
 }
@@ -38,13 +35,10 @@ const ListImg = styled.img`
 `;
 
 ImageGalleryItem.propTypes = {
-  ImageGalleryItem: PropTypes.arrayOf(
-        PropTypes.shape({
-          id: PropTypes.string,
-          largeImageURL: PropTypes.src,
-          webformatURL: PropTypes.src,
-          tags: PropTypes.string,
-        })),
-  onToggle: PropTypes.func.isRequired,
-  onLargePic: PropTypes.func.isRequired,
+          id: PropTypes.number.isRequired,
+          largeImageURL: PropTypes.string.isRequired,
+          webformatURL: PropTypes.string.isRequired,
+          tags: PropTypes.string.isRequired,
+          onLargePic: PropTypes.func.isRequired,
 }
+  
