@@ -33,7 +33,21 @@ class App extends Component {
   async componentDidUpdate(prevProps, prevState) {
         if (prevState.request !== this.state.request || prevState.page !== this.state.page) {
                 this.setState({ status: Status.PENDING});
-                const result = await fetchPicture(this.state.request, this.state.page)
+          const result = await fetchPicture(this.state.request, this.state.page)
+          if (result.hits.length > 0 && result.hits.length < 12) {
+            this.setState({
+              showBtn: false,
+              status: Status.RESOLVED,
+              pictures: [...this.state.pictures,...result.hits]
+            })
+            toast.info(`That's all we found`)
+          } else if (result.total > 12) {
+            this.setState({
+                        pictures: [...this.state.pictures, ...result.hits],
+                      status: Status.RESOLVED,
+                         showBtn: true,
+                    });
+          }
                if (result.total === 0) {
                     this.setState({
                         page: 1,
@@ -41,14 +55,7 @@ class App extends Component {
                         showBtn: false,
                     });
                     toast.error(`Sorry, no results for ${this.state.request}`);    
-                }
-                else {
-                    this.setState({
-                        pictures: [...this.state.pictures, ...result.hits],
-                      status: Status.RESOLVED,
-                         showBtn: true,
-                    });
-            }
+               }
         }
     }
     
